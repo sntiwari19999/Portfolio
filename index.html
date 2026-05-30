@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Shivam Nath Tiwari — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f5f3;
+    --surface: #ffffff;
+    --border: #e4e2dc;
+    --border-strong: #c8c5bc;
+    --text-primary: #1a1916;
+    --text-secondary: #6b6860;
+    --text-muted: #9e9c97;
+    --accent: #185FA5;
+    --accent-light: #E6F1FB;
+    --accent-text: #0C447C;
+    --green-bg: #EAF3DE;
+    --green-text: #27500A;
+    --amber-bg: #FAEEDA;
+    --amber-text: #633806;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .portfolio {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 4rem;
+  }
+
+  /* Hero */
+  .hero {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 2rem 2rem 1.75rem;
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .avatar {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent-text);
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+  }
+
+  .hero-content { flex: 1; }
+
+  .hero-name {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+  }
+
+  .hero-title {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+
+  .hero-summary {
+    font-size: 14px;
+    color: var(--text-primary);
+    line-height: 1.75;
+    margin-bottom: 16px;
+    max-width: 640px;
+  }
+
+  .contact-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .contact-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .contact-item:hover { color: var(--accent); }
+  .contact-item i { font-size: 15px; }
+
+  /* Section */
+  .section { margin-bottom: 1.75rem; }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.09em;
+    color: var(--text-muted);
+    margin-bottom: 0.875rem;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* Metrics */
+  .metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 12px;
+  }
+
+  .metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.125rem 1.125rem 1rem;
+    transition: border-color 0.15s;
+  }
+
+  .metric-card:hover { border-color: var(--border-strong); }
+
+  .metric-num {
+    font-size: 26px;
+    font-weight: 600;
+    color: var(--accent-text);
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .metric-label {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.45;
+  }
+
+  /* Skills */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+
+  .skill-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.125rem;
+  }
+
+  .skill-group-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .skill-group-title i { font-size: 16px; color: var(--accent); }
+
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tag {
+    font-size: 11px;
+    padding: 3px 9px;
+    border-radius: 20px;
+    background: var(--accent-light);
+    color: var(--accent-text);
+    font-weight: 500;
+  }
+
+  /* Experience */
+  .exp-list { display: flex; flex-direction: column; gap: 12px; }
+
+  .exp-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.125rem 1.25rem;
+    transition: border-color 0.15s;
+  }
+
+  .exp-card:hover { border-color: var(--border-strong); }
+
+  .exp-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+    gap: 1rem;
+  }
+
+  .exp-role {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .exp-company {
+    font-size: 13px;
+    color: var(--accent);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+
+  .exp-period {
+    font-size: 12px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+    flex-shrink: 0;
+    background: var(--bg);
+    padding: 3px 10px;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+  }
+
+  .exp-bullets { list-style: none; }
+
+  .exp-bullets li {
+    font-size: 13.5px;
+    color: var(--text-primary);
+    line-height: 1.65;
+    padding: 3px 0 3px 16px;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+  }
+
+  /* Projects */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+  }
+
+  .proj-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.125rem 1.25rem;
+    transition: border-color 0.15s;
+  }
+
+  .proj-card:hover { border-color: var(--border-strong); }
+
+  .proj-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-bottom: 10px;
+  }
+
+  .badge-pbi { background: var(--amber-bg); color: var(--amber-text); }
+  .badge-pa  { background: var(--green-bg); color: var(--green-text); }
+  .badge-apps { background: var(--accent-light); color: var(--accent-text); }
+
+  .proj-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 7px;
+  }
+
+  .proj-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.65;
+    margin-bottom: 10px;
+  }
+
+  .proj-tech { display: flex; flex-wrap: wrap; gap: 5px; }
+
+  .proj-tech span {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    background: var(--bg);
+    color: var(--text-secondary);
+    border: 1px solid var(--border);
+  }
+
+  /* Education */
+  .edu-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.125rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .edu-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: var(--radius-sm);
+    background: var(--accent-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .edu-icon i { font-size: 22px; color: var(--accent); }
+  .edu-degree { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+  .edu-school { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+  .edu-year { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    margin-top: 2.5rem;
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* Responsive */
+  @media (max-width: 560px) {
+    .hero { flex-direction: column; gap: 1rem; }
+    .exp-header { flex-direction: column; gap: 6px; }
+    .exp-period { align-self: flex-start; }
+    .portfolio { padding: 1.25rem 1rem 3rem; }
+  }
+</style>
+</head>
+<body>
+<main class="portfolio">
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="avatar">SN</div>
+    <div class="hero-content">
+      <div class="hero-name">Shivam Nath Tiwari</div>
+      <div class="hero-title">Data Engineer &nbsp;·&nbsp; Power BI Developer &nbsp;·&nbsp; Microsoft Power Platform Specialist</div>
+      <div class="hero-summary">
+        Results-driven Data Engineer with 4+ years of experience building end-to-end data solutions and business automation. Specialist in Power BI, Power Apps, and Power Automate — delivering 10+ interactive dashboards, procurement automation, and workflow systems that measurably reduce processing time and approval cycles.
+      </div>
+      <div class="contact-row">
+        <span class="contact-item"><i class="ti ti-map-pin"></i> New Delhi, India</span>
+        <a class="contact-item" href="mailto:sntiwari1999@gmail.com"><i class="ti ti-mail"></i> sntiwari1999@gmail.com</a>
+        <a class="contact-item" href="tel:+918840812168"><i class="ti ti-phone"></i> +91-8840812168</a>
+        <a class="contact-item" href="https://linkedin.com/in/shivam-nath-tiwari-758625216" target="_blank"><i class="ti ti-brand-linkedin"></i> LinkedIn Profile</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Key Metrics -->
+  <div class="section">
+    <div class="section-label">Impact at a glance</div>
+    <div class="metrics-grid">
+      <div class="metric-card">
+        <div class="metric-num">4+</div>
+        <div class="metric-label">Years in data & Power Platform</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">10+</div>
+        <div class="metric-label">Interactive dashboards delivered</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">30%</div>
+        <div class="metric-label">Reduction in data processing time</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">20%</div>
+        <div class="metric-label">Team productivity gain across 3 projects</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-num">95%</div>
+        <div class="metric-label">Accuracy in network performance evaluations</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills -->
+  <div class="section">
+    <div class="section-label">Technical skills</div>
+    <div class="skills-grid">
+      <div class="skill-group">
+        <div class="skill-group-title"><i class="ti ti-chart-bar"></i> Power Platform</div>
+        <div class="skill-tags">
+          <span class="tag">Power BI</span>
+          <span class="tag">DAX</span>
+          <span class="tag">Power Query</span>
+          <span class="tag">Power Apps</span>
+          <span class="tag">Power Automate</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title"><i class="ti ti-code"></i> Languages & Query</div>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">SQL</span>
+          <span class="tag">PL/TSQL</span>
+          <span class="tag">R</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">C</span>
+          <span class="tag">C++</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title"><i class="ti ti-database"></i> Databases</div>
+        <div class="skill-tags">
+          <span class="tag">MySQL</span>
+          <span class="tag">Oracle</span>
+          <span class="tag">SQL Server</span>
+          <span class="tag">SharePoint</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title"><i class="ti ti-refresh"></i> Data Engineering</div>
+        <div class="skill-tags">
+          <span class="tag">ETL</span>
+          <span class="tag">Data Modelling</span>
+          <span class="tag">Data Cleaning</span>
+          <span class="tag">Data Blending</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title"><i class="ti ti-chart-dots"></i> Visualization</div>
+        <div class="skill-tags">
+          <span class="tag">Tableau</span>
+          <span class="tag">Matplotlib</span>
+          <span class="tag">Seaborn</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title"><i class="ti ti-tool"></i> Tools & Methods</div>
+        <div class="skill-tags">
+          <span class="tag">Microsoft 365</span>
+          <span class="tag">Excel</span>
+          <span class="tag">CRM Tools</span>
+          <span class="tag">Agile</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Experience -->
+  <div class="section">
+    <div class="section-label">Work experience</div>
+    <div class="exp-list">
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Associate System Analyst</div>
+            <div class="exp-company">Sage &nbsp;·&nbsp; New Delhi, India</div>
+          </div>
+          <div class="exp-period">Jun 2024 – Present</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Design and develop Power BI reports and dashboards delivering actionable insights across business units</li>
+          <li>Build Canvas and Model-Driven Power Apps to digitize and automate internal approval processes including CapEx and procurement workflows</li>
+          <li>Automate cross-functional workflows using Power Automate for vendor communications and invoice renewal tracking</li>
+          <li>Collaborate directly with business stakeholders to gather requirements and translate them into scalable Power Platform solutions</li>
+          <li>Reduced approval cycle time significantly by replacing email-based chains with structured digital workflows</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">IT Consultant</div>
+            <div class="exp-company">Sage &nbsp;·&nbsp; New Delhi, India</div>
+          </div>
+          <div class="exp-period">Oct 2021 – May 2024</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Researched network products, services, protocols, and standards to support strategic procurement decisions</li>
+          <li>Analyzed network technologies evaluating features, performance benchmarks, and cost-effectiveness</li>
+          <li>Delivered data-driven insights and recommendations improving network procurement and development strategy</li>
+          <li>Achieved 95% accuracy in network performance data evaluations through rigorous validation processes</li>
+        </ul>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-header">
+          <div>
+            <div class="exp-role">Intern Data Analyst</div>
+            <div class="exp-company">Bepec Solution Pvt. Ltd. &nbsp;·&nbsp; Bengaluru, India</div>
+          </div>
+          <div class="exp-period">Sep 2022 – Apr 2023</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Collected, cleaned, and preprocessed datasets to ensure data quality and analysis-readiness</li>
+          <li>Conducted exploratory data analysis (EDA) to uncover trends and surface insights for senior decision-makers</li>
+          <li>Created charts, graphs, and visualizations using Excel and SQL to clearly communicate findings to stakeholders</li>
+          <li>Supported Agile-based workflows using JavaScript, PL/TSQL, MySQL, and Oracle databases</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Projects -->
+  <div class="section">
+    <div class="section-label">Projects</div>
+    <div class="proj-grid">
+
+      <div class="proj-card">
+        <div class="proj-badge badge-apps"><i class="ti ti-apps" style="font-size:13px"></i> Power Apps</div>
+        <div class="proj-name">Procurement Approval Process App</div>
+        <div class="proj-desc">Canvas app digitizing end-to-end CapEx procurement with multi-stage, role-based approval workflows. Integrated with SharePoint for a complete audit trail. Eliminated email-based approval chains entirely.</div>
+        <div class="proj-tech">
+          <span>Power Apps</span><span>SharePoint</span><span>Power Automate</span><span>Microsoft 365</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-badge badge-pa"><i class="ti ti-refresh" style="font-size:13px"></i> Power Automate</div>
+        <div class="proj-name">Vendor Feedback Automation</div>
+        <div class="proj-desc">Automated bi-directional vendor feedback flow triggered on project completion. Vendor responses routed as instant team notifications — eliminated manual follow-ups and improved vendor response consistency.</div>
+        <div class="proj-tech">
+          <span>Power Automate</span><span>MS Forms</span><span>Outlook</span><span>Teams</span><span>SharePoint</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-badge badge-pa"><i class="ti ti-bell" style="font-size:13px"></i> Power Automate</div>
+        <div class="proj-name">Invoice Renewal Tracking System</div>
+        <div class="proj-desc">Scheduled flow scanning contract renewal dates and triggering automated stakeholder alerts 10 days before expiry. Eliminated missed renewals and reduced financial risk from lapsed contracts.</div>
+        <div class="proj-tech">
+          <span>Power Automate</span><span>SharePoint</span><span>Outlook</span><span>Microsoft 365</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-badge badge-pbi"><i class="ti ti-chart-bar" style="font-size:13px"></i> Power BI</div>
+        <div class="proj-name">Sales Performance Dashboard</div>
+        <div class="proj-desc">Comprehensive dashboard tracking revenue, sales growth, average order value, and regional performance. Includes geographic mapping, customer segmentation, drill-down views, and inventory monitoring.</div>
+        <div class="proj-tech">
+          <span>Power BI</span><span>DAX</span><span>SQL</span><span>Excel</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-badge badge-pbi"><i class="ti ti-users" style="font-size:13px"></i> Power BI</div>
+        <div class="proj-name">HR Recruitment Dashboard</div>
+        <div class="proj-desc">Real-time dashboard visualizing the full recruitment funnel from applications to hires. Included recruiter KPI tracking, time-to-fill analysis, and candidate feedback sentiment analysis.</div>
+        <div class="proj-tech">
+          <span>Power BI</span><span>DAX</span><span>SQL</span>
+        </div>
+      </div>
+
+      <div class="proj-card">
+        <div class="proj-badge badge-pbi"><i class="ti ti-activity" style="font-size:13px"></i> Power BI</div>
+        <div class="proj-name">Employee Performance Dashboard</div>
+        <div class="proj-desc">Advanced data modelling using DAX, parameters, context filters, and hierarchies. Interactive dashboards for merchant data and campaign performance via SQL and Excel ETL pipelines.</div>
+        <div class="proj-tech">
+          <span>Power BI</span><span>DAX</span><span>ETL</span><span>SQL</span><span>Excel</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Education -->
+  <div class="section">
+    <div class="section-label">Education</div>
+    <div class="edu-card">
+      <div class="edu-icon"><i class="ti ti-school"></i></div>
+      <div>
+        <div class="edu-degree">B.Tech in Computer Science and Engineering</div>
+        <div class="edu-school">APJ Abdul Kalam Technological University</div>
+        <div class="edu-year">2017 – 2021</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">Shivam Nath Tiwari &nbsp;·&nbsp; sntiwari1999@gmail.com &nbsp;·&nbsp; New Delhi, India</div>
+
+</main>
+</body>
+</html>
