@@ -1,610 +1,961 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Shivam Nath Tiwari — Portfolio</title>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet"/>
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #04060f;
+  --surface: #080c18;
+  --surface2: #0c1020;
+  --border: rgba(255,255,255,0.06);
+  --border-hover: rgba(24,95,165,0.5);
+  --blue: #1976D2;
+  --blue-light: #42A5F5;
+  --blue-dim: #0D2137;
+  --text: #f0f4ff;
+  --text-2: #8aa4c0;
+  --text-3: #4a6480;
+  --accent: #1565C0;
+  --green: #2E7D32;
+  --green-light: #66BB6A;
+  --amber: #E65100;
+  --amber-light: #FFA726;
+  --purple: #6A1B9A;
+  --purple-light: #CE93D8;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
-  :root {
-    --bg: #f5f5f3;
-    --surface: #ffffff;
-    --border: #e4e2dc;
-    --border-strong: #c8c5bc;
-    --text-primary: #1a1916;
-    --text-secondary: #6b6860;
-    --text-muted: #9e9c97;
-    --accent: #185FA5;
-    --accent-light: #E6F1FB;
-    --accent-text: #0C447C;
-    --green-bg: #EAF3DE;
-    --green-text: #27500A;
-    --amber-bg: #FAEEDA;
-    --amber-text: #633806;
-    --radius-sm: 8px;
-    --radius-md: 12px;
-    --radius-lg: 16px;
-  }
+html{scroll-behavior:smooth;}
 
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text-primary);
-    line-height: 1.6;
-    min-height: 100vh;
-  }
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+}
 
-  .portfolio {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 2.5rem 1.5rem 4rem;
-  }
+/* ── NOISE OVERLAY ── */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;
+  z-index:0;
+  opacity:.4;
+}
 
-  /* Hero */
-  .hero {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 2rem 2rem 1.75rem;
-    margin-bottom: 1.5rem;
-    display: flex;
-    gap: 1.5rem;
-    align-items: flex-start;
-  }
+/* ── GRID LINES ── */
+body::after{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:
+    linear-gradient(rgba(24,95,165,0.04) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(24,95,165,0.04) 1px,transparent 1px);
+  background-size:64px 64px;
+  pointer-events:none;
+  z-index:0;
+}
 
-  .avatar {
-    width: 68px;
-    height: 68px;
-    border-radius: 50%;
-    background: var(--accent-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    font-weight: 600;
-    color: var(--accent-text);
-    flex-shrink: 0;
-    border: 1px solid var(--border);
-  }
+/* ── NAV ── */
+nav{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:100;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 2.5rem;
+  height:60px;
+  background:rgba(4,6,15,0.85);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;
+  font-weight:800;
+  font-size:18px;
+  color:var(--text);
+  letter-spacing:-0.5px;
+}
+.nav-logo span{color:var(--blue-light);}
+.nav-links{display:flex;gap:2rem;}
+.nav-links a{
+  font-size:13px;
+  font-weight:500;
+  color:var(--text-2);
+  text-decoration:none;
+  letter-spacing:.03em;
+  transition:color .2s;
+}
+.nav-links a:hover{color:var(--blue-light);}
+.nav-cta{
+  font-size:13px;
+  font-weight:500;
+  padding:7px 18px;
+  border-radius:6px;
+  background:var(--accent);
+  color:#fff;
+  text-decoration:none;
+  transition:background .2s,transform .15s;
+}
+.nav-cta:hover{background:var(--blue);transform:translateY(-1px);}
 
-  .hero-content { flex: 1; }
+/* ── WRAPPER ── */
+.wrap{
+  max-width:1040px;
+  margin:0 auto;
+  padding:0 2rem;
+  position:relative;
+  z-index:1;
+}
 
-  .hero-name {
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-  }
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:8rem 0 5rem;
+}
+.hero-eyebrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:12px;
+  font-weight:500;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--blue-light);
+  margin-bottom:1.5rem;
+  opacity:0;
+  animation:fadeUp .6s .1s forwards;
+}
+.hero-eyebrow::before{
+  content:'';
+  display:block;
+  width:24px;height:1px;
+  background:var(--blue-light);
+}
+.hero-name{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(48px,7vw,88px);
+  font-weight:800;
+  line-height:.95;
+  letter-spacing:-3px;
+  color:var(--text);
+  margin-bottom:1.5rem;
+  opacity:0;
+  animation:fadeUp .7s .2s forwards;
+}
+.hero-name .line2{
+  display:block;
+  color:transparent;
+  -webkit-text-stroke:1px rgba(255,255,255,0.25);
+}
+.hero-desc{
+  max-width:520px;
+  font-size:17px;
+  font-weight:300;
+  line-height:1.75;
+  color:var(--text-2);
+  margin-bottom:2.5rem;
+  opacity:0;
+  animation:fadeUp .7s .35s forwards;
+}
+.hero-actions{
+  display:flex;
+  gap:1rem;
+  align-items:center;
+  opacity:0;
+  animation:fadeUp .7s .5s forwards;
+}
+.btn-primary{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:13px 28px;
+  background:var(--accent);
+  color:#fff;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:500;
+  text-decoration:none;
+  transition:background .2s,transform .15s,box-shadow .2s;
+  box-shadow:0 0 0 0 rgba(25,118,210,0);
+}
+.btn-primary:hover{
+  background:var(--blue);
+  transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(25,118,210,0.35);
+}
+.btn-ghost{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:13px 28px;
+  border:1px solid var(--border-hover);
+  color:var(--blue-light);
+  border-radius:8px;
+  font-size:14px;
+  font-weight:500;
+  text-decoration:none;
+  transition:background .2s,transform .15s;
+}
+.btn-ghost:hover{background:var(--blue-dim);transform:translateY(-2px);}
 
-  .hero-title {
-    font-size: 14px;
-    color: var(--text-secondary);
-    margin-bottom: 14px;
-    font-weight: 500;
-  }
+/* Hero metrics row */
+.hero-metrics{
+  display:flex;
+  gap:3rem;
+  margin-top:4rem;
+  padding-top:2.5rem;
+  border-top:1px solid var(--border);
+  opacity:0;
+  animation:fadeUp .7s .65s forwards;
+}
+.hero-metric-num{
+  font-family:'Syne',sans-serif;
+  font-size:36px;
+  font-weight:800;
+  color:var(--blue-light);
+  line-height:1;
+}
+.hero-metric-label{
+  font-size:12px;
+  color:var(--text-3);
+  margin-top:4px;
+  letter-spacing:.02em;
+}
 
-  .hero-summary {
-    font-size: 14px;
-    color: var(--text-primary);
-    line-height: 1.75;
-    margin-bottom: 16px;
-    max-width: 640px;
-  }
+/* ── SECTION SHARED ── */
+section{padding:6rem 0;}
+.section-tag{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--blue-light);
+  margin-bottom:1rem;
+}
+.section-tag::before{
+  content:'';
+  width:20px;height:1px;
+  background:var(--blue-light);
+}
+.section-title{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(32px,4vw,48px);
+  font-weight:800;
+  letter-spacing:-1.5px;
+  line-height:1.05;
+  margin-bottom:3.5rem;
+  color:var(--text);
+}
+.section-title span{color:var(--blue-light);}
 
-  .contact-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-  }
+/* ── SKILLS ── */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;}
+.skill-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.5rem;
+  transition:border-color .25s,transform .25s,box-shadow .25s;
+}
+.skill-card:hover{
+  border-color:var(--border-hover);
+  transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(25,118,210,0.12);
+}
+.skill-card-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:1.25rem;
+}
+.skill-icon{
+  width:36px;height:36px;
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:16px;
+}
+.skill-card-title{font-family:'Syne',sans-serif;font-size:14px;font-weight:700;color:var(--text);}
+.skill-bar-wrap{margin-bottom:10px;}
+.skill-bar-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.skill-bar-name{font-size:12px;color:var(--text-2);}
+.skill-bar-pct{font-size:11px;font-weight:600;color:var(--blue-light);font-variant-numeric:tabular-nums;}
+.skill-bar-track{
+  height:4px;
+  background:rgba(255,255,255,0.06);
+  border-radius:99px;
+  overflow:hidden;
+}
+.skill-bar-fill{
+  height:100%;
+  border-radius:99px;
+  width:0;
+  transition:width 1.2s cubic-bezier(.4,0,.2,1);
+}
 
-  .contact-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 13px;
-    color: var(--text-secondary);
-    text-decoration: none;
-  }
+/* ── EXPERIENCE ── */
+.exp-timeline{display:flex;flex-direction:column;gap:0;}
+.exp-item{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:2rem;
+  padding:2.5rem 0;
+  border-bottom:1px solid var(--border);
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .6s,transform .6s;
+}
+.exp-item.visible{opacity:1;transform:none;}
+.exp-item:last-child{border-bottom:none;}
+.exp-period{
+  font-size:12px;
+  color:var(--text-3);
+  font-weight:500;
+  letter-spacing:.04em;
+  padding-top:4px;
+}
+.exp-company{
+  font-size:11px;
+  color:var(--blue-light);
+  font-weight:600;
+  text-transform:uppercase;
+  letter-spacing:.1em;
+  margin-bottom:4px;
+}
+.exp-role{
+  font-family:'Syne',sans-serif;
+  font-size:20px;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:12px;
+  letter-spacing:-.4px;
+}
+.exp-bullets{list-style:none;}
+.exp-bullets li{
+  font-size:14px;
+  color:var(--text-2);
+  line-height:1.7;
+  padding:3px 0 3px 16px;
+  position:relative;
+}
+.exp-bullets li::before{
+  content:'';
+  position:absolute;
+  left:0;top:13px;
+  width:6px;height:1px;
+  background:var(--blue);
+}
 
-  .contact-item:hover { color: var(--accent); }
-  .contact-item i { font-size: 15px; }
+/* ── PROJECTS ── */
+.filter-bar{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-bottom:2.5rem;
+}
+.filter-btn{
+  padding:7px 18px;
+  border-radius:99px;
+  font-size:13px;
+  font-weight:500;
+  border:1px solid var(--border);
+  background:transparent;
+  color:var(--text-2);
+  cursor:pointer;
+  transition:all .2s;
+}
+.filter-btn:hover,.filter-btn.active{
+  background:var(--accent);
+  color:#fff;
+  border-color:var(--accent);
+}
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(300px,1fr));
+  gap:16px;
+}
+.proj-card{
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:1.5rem;
+  transition:border-color .25s,transform .25s,box-shadow .25s,opacity .3s;
+  opacity:0;
+  transform:translateY(16px);
+}
+.proj-card.visible{opacity:1;transform:none;}
+.proj-card:hover{
+  border-color:var(--border-hover);
+  transform:translateY(-4px);
+  box-shadow:0 16px 40px rgba(25,118,210,0.12);
+}
+.proj-card.hidden{display:none;}
+.proj-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  padding:4px 10px;
+  border-radius:99px;
+  margin-bottom:1rem;
+}
+.badge-pbi{background:rgba(230,81,0,0.15);color:#FFA726;border:1px solid rgba(230,81,0,0.3);}
+.badge-pa{background:rgba(46,125,50,0.15);color:#66BB6A;border:1px solid rgba(46,125,50,0.3);}
+.badge-apps{background:rgba(25,118,210,0.15);color:#42A5F5;border:1px solid rgba(25,118,210,0.3);}
+.proj-name{
+  font-family:'Syne',sans-serif;
+  font-size:16px;
+  font-weight:700;
+  color:var(--text);
+  margin-bottom:8px;
+  letter-spacing:-.3px;
+}
+.proj-desc{font-size:13px;color:var(--text-2);line-height:1.7;margin-bottom:1rem;}
+.proj-tech{display:flex;flex-wrap:wrap;gap:6px;}
+.proj-tech span{
+  font-size:11px;
+  padding:3px 9px;
+  border-radius:99px;
+  background:var(--surface2);
+  color:var(--text-3);
+  border:1px solid var(--border);
+}
 
-  /* Section */
-  .section { margin-bottom: 1.75rem; }
+/* ── ABOUT / CONTACT ── */
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:4rem;
+  align-items:center;
+}
+.about-text p{
+  font-size:15px;
+  line-height:1.85;
+  color:var(--text-2);
+  margin-bottom:1rem;
+  font-weight:300;
+}
+.about-text p strong{color:var(--text);font-weight:500;}
+.contact-list{display:flex;flex-direction:column;gap:12px;}
+.contact-row-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 18px;
+  background:var(--surface);
+  border:1px solid var(--border);
+  border-radius:10px;
+  text-decoration:none;
+  transition:border-color .2s,transform .15s;
+}
+.contact-row-item:hover{border-color:var(--border-hover);transform:translateX(4px);}
+.contact-icon{
+  width:36px;height:36px;
+  border-radius:8px;
+  background:var(--blue-dim);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;color:var(--blue-light);
+  flex-shrink:0;
+}
+.contact-label{font-size:11px;color:var(--text-3);margin-bottom:2px;letter-spacing:.04em;}
+.contact-val{font-size:13px;color:var(--text);font-weight:500;}
 
-  .section-label {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.09em;
-    color: var(--text-muted);
-    margin-bottom: 0.875rem;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--border);
-  }
+/* ── FOOTER ── */
+footer{
+  padding:2rem 0;
+  border-top:1px solid var(--border);
+  text-align:center;
+  font-size:12px;
+  color:var(--text-3);
+}
 
-  /* Metrics */
-  .metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-  }
+/* ── SCROLL REVEAL ── */
+.reveal{
+  opacity:0;
+  transform:translateY(24px);
+  transition:opacity .7s ease,transform .7s ease;
+}
+.reveal.visible{opacity:1;transform:none;}
 
-  .metric-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 1.125rem 1.125rem 1rem;
-    transition: border-color 0.15s;
-  }
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;transform:none;}
+}
 
-  .metric-card:hover { border-color: var(--border-strong); }
+/* ── CURSOR DOT ── */
+.cursor{
+  position:fixed;
+  width:8px;height:8px;
+  background:var(--blue-light);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:9999;
+  transform:translate(-50%,-50%);
+  transition:transform .08s,width .2s,height .2s,opacity .2s;
+  mix-blend-mode:screen;
+}
+.cursor-ring{
+  position:fixed;
+  width:32px;height:32px;
+  border:1px solid rgba(66,165,245,0.4);
+  border-radius:50%;
+  pointer-events:none;
+  z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:all .15s ease;
+}
 
-  .metric-num {
-    font-size: 26px;
-    font-weight: 600;
-    color: var(--accent-text);
-    line-height: 1;
-    margin-bottom: 6px;
-  }
-
-  .metric-label {
-    font-size: 12px;
-    color: var(--text-secondary);
-    line-height: 1.45;
-  }
-
-  /* Skills */
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 12px;
-  }
-
-  .skill-group {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 1rem 1.125rem;
-  }
-
-  .skill-group-title {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 7px;
-  }
-
-  .skill-group-title i { font-size: 16px; color: var(--accent); }
-
-  .skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-
-  .tag {
-    font-size: 11px;
-    padding: 3px 9px;
-    border-radius: 20px;
-    background: var(--accent-light);
-    color: var(--accent-text);
-    font-weight: 500;
-  }
-
-  /* Experience */
-  .exp-list { display: flex; flex-direction: column; gap: 12px; }
-
-  .exp-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 1.125rem 1.25rem;
-    transition: border-color 0.15s;
-  }
-
-  .exp-card:hover { border-color: var(--border-strong); }
-
-  .exp-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 10px;
-    gap: 1rem;
-  }
-
-  .exp-role {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--text-primary);
-  }
-
-  .exp-company {
-    font-size: 13px;
-    color: var(--accent);
-    margin-top: 2px;
-    font-weight: 500;
-  }
-
-  .exp-period {
-    font-size: 12px;
-    color: var(--text-secondary);
-    white-space: nowrap;
-    flex-shrink: 0;
-    background: var(--bg);
-    padding: 3px 10px;
-    border-radius: 20px;
-    border: 1px solid var(--border);
-  }
-
-  .exp-bullets { list-style: none; }
-
-  .exp-bullets li {
-    font-size: 13.5px;
-    color: var(--text-primary);
-    line-height: 1.65;
-    padding: 3px 0 3px 16px;
-    position: relative;
-  }
-
-  .exp-bullets li::before {
-    content: '–';
-    position: absolute;
-    left: 0;
-    color: var(--text-muted);
-  }
-
-  /* Projects */
-  .proj-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 12px;
-  }
-
-  .proj-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 1.125rem 1.25rem;
-    transition: border-color 0.15s;
-  }
-
-  .proj-card:hover { border-color: var(--border-strong); }
-
-  .proj-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 3px 9px;
-    border-radius: 20px;
-    margin-bottom: 10px;
-  }
-
-  .badge-pbi { background: var(--amber-bg); color: var(--amber-text); }
-  .badge-pa  { background: var(--green-bg); color: var(--green-text); }
-  .badge-apps { background: var(--accent-light); color: var(--accent-text); }
-
-  .proj-name {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 7px;
-  }
-
-  .proj-desc {
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.65;
-    margin-bottom: 10px;
-  }
-
-  .proj-tech { display: flex; flex-wrap: wrap; gap: 5px; }
-
-  .proj-tech span {
-    font-size: 11px;
-    padding: 2px 8px;
-    border-radius: 20px;
-    background: var(--bg);
-    color: var(--text-secondary);
-    border: 1px solid var(--border);
-  }
-
-  /* Education */
-  .edu-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-md);
-    padding: 1.125rem 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-  }
-
-  .edu-icon {
-    width: 44px;
-    height: 44px;
-    border-radius: var(--radius-sm);
-    background: var(--accent-light);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-  }
-
-  .edu-icon i { font-size: 22px; color: var(--accent); }
-  .edu-degree { font-size: 14px; font-weight: 600; color: var(--text-primary); }
-  .edu-school { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
-  .edu-year { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    margin-top: 2.5rem;
-    font-size: 12px;
-    color: var(--text-muted);
-  }
-
-  /* Responsive */
-  @media (max-width: 560px) {
-    .hero { flex-direction: column; gap: 1rem; }
-    .exp-header { flex-direction: column; gap: 6px; }
-    .exp-period { align-self: flex-start; }
-    .portfolio { padding: 1.25rem 1rem 3rem; }
-  }
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  nav{padding:0 1.25rem;}
+  .nav-links{display:none;}
+  .wrap{padding:0 1.25rem;}
+  .hero-metrics{gap:2rem;flex-wrap:wrap;}
+  .exp-item{grid-template-columns:1fr;}
+  .about-grid{grid-template-columns:1fr;}
+  .hero-name{letter-spacing:-1.5px;}
+}
 </style>
 </head>
 <body>
-<main class="portfolio">
 
-  <!-- Hero -->
-  <div class="hero">
-    <div class="avatar">SN</div>
-    <div class="hero-content">
-      <div class="hero-name">Shivam Nath Tiwari</div>
-      <div class="hero-title">Data Engineer &nbsp;·&nbsp; Power BI Developer &nbsp;·&nbsp; Microsoft Power Platform Specialist</div>
-      <div class="hero-summary">
-        Results-driven Data Engineer with 4+ years of experience building end-to-end data solutions and business automation. Specialist in Power BI, Power Apps, and Power Automate — delivering 10+ interactive dashboards, procurement automation, and workflow systems that measurably reduce processing time and approval cycles.
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">SNT<span>.</span></div>
+  <div class="nav-links">
+    <a href="#skills">Skills</a>
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <a href="mailto:sntiwari1999@gmail.com" class="nav-cta">Hire Me</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">Available for opportunities</div>
+    <h1 class="hero-name">
+      Shivam Nath<br>
+      <span class="line2">Tiwari</span>
+    </h1>
+    <p class="hero-desc">
+      Data Engineer &amp; Microsoft Power Platform Specialist with 4+ years turning messy data into clean dashboards, automated workflows, and decisions that actually move the needle.
+    </p>
+    <div class="hero-actions">
+      <a href="#projects" class="btn-primary">View Projects ↓</a>
+      <a href="mailto:sntiwari1999@gmail.com" class="btn-ghost">Get in Touch →</a>
+    </div>
+    <div class="hero-metrics">
+      <div>
+        <div class="hero-metric-num" data-count="4">0</div>
+        <div class="hero-metric-label">Years Experience</div>
       </div>
-      <div class="contact-row">
-        <span class="contact-item"><i class="ti ti-map-pin"></i> New Delhi, India</span>
-        <a class="contact-item" href="mailto:sntiwari1999@gmail.com"><i class="ti ti-mail"></i> sntiwari1999@gmail.com</a>
-        <a class="contact-item" href="tel:+918840812168"><i class="ti ti-phone"></i> +91-8840812168</a>
-        <a class="contact-item" href="https://linkedin.com/in/shivam-nath-tiwari-758625216" target="_blank"><i class="ti ti-brand-linkedin"></i> LinkedIn Profile</a>
+      <div>
+        <div class="hero-metric-num" data-count="10">0</div>
+        <div class="hero-metric-label">Dashboards Delivered</div>
+      </div>
+      <div>
+        <div class="hero-metric-num" data-count="30">0</div>
+        <div class="hero-metric-label">% Processing Time Saved</div>
+      </div>
+      <div>
+        <div class="hero-metric-num" data-count="20">0</div>
+        <div class="hero-metric-label">% Productivity Gained</div>
+      </div>
+      <div>
+        <div class="hero-metric-num" data-count="95">0</div>
+        <div class="hero-metric-label">% Data Accuracy</div>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- Key Metrics -->
-  <div class="section">
-    <div class="section-label">Impact at a glance</div>
-    <div class="metrics-grid">
-      <div class="metric-card">
-        <div class="metric-num">4+</div>
-        <div class="metric-label">Years in data & Power Platform</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-num">10+</div>
-        <div class="metric-label">Interactive dashboards delivered</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-num">30%</div>
-        <div class="metric-label">Reduction in data processing time</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-num">20%</div>
-        <div class="metric-label">Team productivity gain across 3 projects</div>
-      </div>
-      <div class="metric-card">
-        <div class="metric-num">95%</div>
-        <div class="metric-label">Accuracy in network performance evaluations</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Skills -->
-  <div class="section">
-    <div class="section-label">Technical skills</div>
+<!-- SKILLS -->
+<section id="skills">
+  <div class="wrap">
+    <div class="section-tag reveal">Technical Expertise</div>
+    <h2 class="section-title reveal">Skills &amp; <span>Tools</span></h2>
     <div class="skills-grid">
-      <div class="skill-group">
-        <div class="skill-group-title"><i class="ti ti-chart-bar"></i> Power Platform</div>
-        <div class="skill-tags">
-          <span class="tag">Power BI</span>
-          <span class="tag">DAX</span>
-          <span class="tag">Power Query</span>
-          <span class="tag">Power Apps</span>
-          <span class="tag">Power Automate</span>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-header">
+          <div class="skill-icon" style="background:rgba(25,118,210,0.15);">📊</div>
+          <div class="skill-card-title">Power Platform</div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-row"><span class="skill-bar-name">Power BI / DAX</span><span class="skill-bar-pct">92%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--blue-light);" data-w="92"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-row"><span class="skill-bar-name">Power Apps</span><span class="skill-bar-pct">85%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--blue-light);" data-w="85"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-row"><span class="skill-bar-name">Power Automate</span><span class="skill-bar-pct">88%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--blue-light);" data-w="88"></div></div>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title"><i class="ti ti-code"></i> Languages & Query</div>
-        <div class="skill-tags">
-          <span class="tag">Python</span>
-          <span class="tag">SQL</span>
-          <span class="tag">PL/TSQL</span>
-          <span class="tag">R</span>
-          <span class="tag">JavaScript</span>
-          <span class="tag">C</span>
-          <span class="tag">C++</span>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-header">
+          <div class="skill-icon" style="background:rgba(46,125,50,0.15);">🐍</div>
+          <div class="skill-card-title">Languages & Query</div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-row"><span class="skill-bar-name">Python</span><span class="skill-bar-pct">80%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--green-light);" data-w="80"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-row"><span class="skill-bar-name">SQL / PL-TSQL</span><span class="skill-bar-pct">87%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--green-light);" data-w="87"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-row"><span class="skill-bar-name">JavaScript</span><span class="skill-bar-pct">70%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--green-light);" data-w="70"></div></div>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title"><i class="ti ti-database"></i> Databases</div>
-        <div class="skill-tags">
-          <span class="tag">MySQL</span>
-          <span class="tag">Oracle</span>
-          <span class="tag">SQL Server</span>
-          <span class="tag">SharePoint</span>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-header">
+          <div class="skill-icon" style="background:rgba(230,81,0,0.15);">🗄️</div>
+          <div class="skill-card-title">Data Engineering</div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-row"><span class="skill-bar-name">ETL Pipelines</span><span class="skill-bar-pct">85%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--amber-light);" data-w="85"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-row"><span class="skill-bar-name">Data Modelling</span><span class="skill-bar-pct">82%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--amber-light);" data-w="82"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-row"><span class="skill-bar-name">SQL Server / Oracle</span><span class="skill-bar-pct">80%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--amber-light);" data-w="80"></div></div>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title"><i class="ti ti-refresh"></i> Data Engineering</div>
-        <div class="skill-tags">
-          <span class="tag">ETL</span>
-          <span class="tag">Data Modelling</span>
-          <span class="tag">Data Cleaning</span>
-          <span class="tag">Data Blending</span>
+
+      <div class="skill-card reveal">
+        <div class="skill-card-header">
+          <div class="skill-icon" style="background:rgba(106,27,154,0.15);">📈</div>
+          <div class="skill-card-title">Visualization</div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-row"><span class="skill-bar-name">Tableau</span><span class="skill-bar-pct">75%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--purple-light);" data-w="75"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-row"><span class="skill-bar-name">Matplotlib / Seaborn</span><span class="skill-bar-pct">72%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--purple-light);" data-w="72"></div></div>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-row"><span class="skill-bar-name">Excel Advanced</span><span class="skill-bar-pct">90%</span></div>
+          <div class="skill-bar-track"><div class="skill-bar-fill" style="background:var(--purple-light);" data-w="90"></div></div>
         </div>
       </div>
-      <div class="skill-group">
-        <div class="skill-group-title"><i class="ti ti-chart-dots"></i> Visualization</div>
-        <div class="skill-tags">
-          <span class="tag">Tableau</span>
-          <span class="tag">Matplotlib</span>
-          <span class="tag">Seaborn</span>
-        </div>
-      </div>
-      <div class="skill-group">
-        <div class="skill-group-title"><i class="ti ti-tool"></i> Tools & Methods</div>
-        <div class="skill-tags">
-          <span class="tag">Microsoft 365</span>
-          <span class="tag">Excel</span>
-          <span class="tag">CRM Tools</span>
-          <span class="tag">Agile</span>
-        </div>
-      </div>
+
     </div>
   </div>
+</section>
 
-  <!-- Experience -->
-  <div class="section">
-    <div class="section-label">Work experience</div>
-    <div class="exp-list">
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="wrap">
+    <div class="section-tag reveal">Work History</div>
+    <h2 class="section-title reveal">Experience</h2>
+    <div class="exp-timeline">
 
-      <div class="exp-card">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role">Associate System Analyst</div>
-            <div class="exp-company">Sage &nbsp;·&nbsp; New Delhi, India</div>
-          </div>
+      <div class="exp-item">
+        <div>
           <div class="exp-period">Jun 2024 – Present</div>
         </div>
-        <ul class="exp-bullets">
-          <li>Design and develop Power BI reports and dashboards delivering actionable insights across business units</li>
-          <li>Build Canvas and Model-Driven Power Apps to digitize and automate internal approval processes including CapEx and procurement workflows</li>
-          <li>Automate cross-functional workflows using Power Automate for vendor communications and invoice renewal tracking</li>
-          <li>Collaborate directly with business stakeholders to gather requirements and translate them into scalable Power Platform solutions</li>
-          <li>Reduced approval cycle time significantly by replacing email-based chains with structured digital workflows</li>
-        </ul>
+        <div>
+          <div class="exp-company">Sage · New Delhi</div>
+          <div class="exp-role">Associate System Analyst</div>
+          <ul class="exp-bullets">
+            <li>Design and develop Power BI reports and dashboards delivering actionable insights across business units</li>
+            <li>Build Canvas and Model-Driven Power Apps to digitize and automate CapEx and procurement approval workflows</li>
+            <li>Automate cross-functional workflows using Power Automate for vendor communications and invoice renewal tracking</li>
+            <li>Collaborate with stakeholders to translate requirements into scalable Power Platform solutions</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="exp-card">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role">IT Consultant</div>
-            <div class="exp-company">Sage &nbsp;·&nbsp; New Delhi, India</div>
-          </div>
+      <div class="exp-item">
+        <div>
           <div class="exp-period">Oct 2021 – May 2024</div>
         </div>
-        <ul class="exp-bullets">
-          <li>Researched network products, services, protocols, and standards to support strategic procurement decisions</li>
-          <li>Analyzed network technologies evaluating features, performance benchmarks, and cost-effectiveness</li>
-          <li>Delivered data-driven insights and recommendations improving network procurement and development strategy</li>
-          <li>Achieved 95% accuracy in network performance data evaluations through rigorous validation processes</li>
-        </ul>
+        <div>
+          <div class="exp-company">Sage · New Delhi</div>
+          <div class="exp-role">IT Consultant</div>
+          <ul class="exp-bullets">
+            <li>Researched network products, services, and protocols to support strategic procurement decisions</li>
+            <li>Analyzed network technologies evaluating performance, features, and cost-effectiveness</li>
+            <li>Achieved 95% accuracy in network performance data evaluations through rigorous validation</li>
+            <li>Delivered data-driven insights improving network procurement and development strategy</li>
+          </ul>
+        </div>
       </div>
 
-      <div class="exp-card">
-        <div class="exp-header">
-          <div>
-            <div class="exp-role">Intern Data Analyst</div>
-            <div class="exp-company">Bepec Solution Pvt. Ltd. &nbsp;·&nbsp; Bengaluru, India</div>
-          </div>
+      <div class="exp-item">
+        <div>
           <div class="exp-period">Sep 2022 – Apr 2023</div>
         </div>
-        <ul class="exp-bullets">
-          <li>Collected, cleaned, and preprocessed datasets to ensure data quality and analysis-readiness</li>
-          <li>Conducted exploratory data analysis (EDA) to uncover trends and surface insights for senior decision-makers</li>
-          <li>Created charts, graphs, and visualizations using Excel and SQL to clearly communicate findings to stakeholders</li>
-          <li>Supported Agile-based workflows using JavaScript, PL/TSQL, MySQL, and Oracle databases</li>
-        </ul>
+        <div>
+          <div class="exp-company">Bepec Solution · Bengaluru</div>
+          <div class="exp-role">Intern Data Analyst</div>
+          <ul class="exp-bullets">
+            <li>Collected, cleaned, and preprocessed datasets ensuring analysis-ready data quality</li>
+            <li>Conducted EDA to uncover trends and surface insights for senior decision-makers</li>
+            <li>Created charts and visualizations using Excel and SQL to communicate findings</li>
+          </ul>
+        </div>
       </div>
 
     </div>
   </div>
+</section>
 
-  <!-- Projects -->
-  <div class="section">
-    <div class="section-label">Projects</div>
-    <div class="proj-grid">
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="wrap">
+    <div class="section-tag reveal">Work Showcase</div>
+    <h2 class="section-title reveal">Projects</h2>
 
-      <div class="proj-card">
-        <div class="proj-badge badge-apps"><i class="ti ti-apps" style="font-size:13px"></i> Power Apps</div>
-        <div class="proj-name">Procurement Approval Process App</div>
-        <div class="proj-desc">Canvas app digitizing end-to-end CapEx procurement with multi-stage, role-based approval workflows. Integrated with SharePoint for a complete audit trail. Eliminated email-based approval chains entirely.</div>
-        <div class="proj-tech">
-          <span>Power Apps</span><span>SharePoint</span><span>Power Automate</span><span>Microsoft 365</span>
-        </div>
+    <div class="filter-bar reveal">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="powerbi">Power BI</button>
+      <button class="filter-btn" data-filter="automate">Power Automate</button>
+      <button class="filter-btn" data-filter="apps">Power Apps</button>
+    </div>
+
+    <div class="projects-grid">
+
+      <div class="proj-card" data-cat="apps">
+        <div class="proj-badge badge-apps">Power Apps</div>
+        <div class="proj-name">Procurement Approval App</div>
+        <div class="proj-desc">Canvas app digitizing end-to-end CapEx procurement with multi-stage role-based approval workflows. Full SharePoint audit trail. Eliminated email-based chains entirely.</div>
+        <div class="proj-tech"><span>Power Apps</span><span>SharePoint</span><span>Power Automate</span><span>M365</span></div>
       </div>
 
-      <div class="proj-card">
-        <div class="proj-badge badge-pa"><i class="ti ti-refresh" style="font-size:13px"></i> Power Automate</div>
+      <div class="proj-card" data-cat="automate">
+        <div class="proj-badge badge-pa">Power Automate</div>
         <div class="proj-name">Vendor Feedback Automation</div>
-        <div class="proj-desc">Automated bi-directional vendor feedback flow triggered on project completion. Vendor responses routed as instant team notifications — eliminated manual follow-ups and improved vendor response consistency.</div>
-        <div class="proj-tech">
-          <span>Power Automate</span><span>MS Forms</span><span>Outlook</span><span>Teams</span><span>SharePoint</span>
-        </div>
+        <div class="proj-desc">Automated bi-directional vendor feedback flow on project completion. Responses routed as instant team notifications — eliminated manual follow-ups entirely.</div>
+        <div class="proj-tech"><span>Power Automate</span><span>MS Forms</span><span>Outlook</span><span>Teams</span></div>
       </div>
 
-      <div class="proj-card">
-        <div class="proj-badge badge-pa"><i class="ti ti-bell" style="font-size:13px"></i> Power Automate</div>
-        <div class="proj-name">Invoice Renewal Tracking System</div>
-        <div class="proj-desc">Scheduled flow scanning contract renewal dates and triggering automated stakeholder alerts 10 days before expiry. Eliminated missed renewals and reduced financial risk from lapsed contracts.</div>
-        <div class="proj-tech">
-          <span>Power Automate</span><span>SharePoint</span><span>Outlook</span><span>Microsoft 365</span>
-        </div>
+      <div class="proj-card" data-cat="automate">
+        <div class="proj-badge badge-pa">Power Automate</div>
+        <div class="proj-name">Invoice Renewal Tracker</div>
+        <div class="proj-desc">Scheduled flow scanning contract renewal dates and triggering stakeholder alerts 10 days before expiry. Eliminated missed renewals and reduced financial risk.</div>
+        <div class="proj-tech"><span>Power Automate</span><span>SharePoint</span><span>Outlook</span></div>
       </div>
 
-      <div class="proj-card">
-        <div class="proj-badge badge-pbi"><i class="ti ti-chart-bar" style="font-size:13px"></i> Power BI</div>
+      <div class="proj-card" data-cat="powerbi">
+        <div class="proj-badge badge-pbi">Power BI</div>
         <div class="proj-name">Sales Performance Dashboard</div>
-        <div class="proj-desc">Comprehensive dashboard tracking revenue, sales growth, average order value, and regional performance. Includes geographic mapping, customer segmentation, drill-down views, and inventory monitoring.</div>
-        <div class="proj-tech">
-          <span>Power BI</span><span>DAX</span><span>SQL</span><span>Excel</span>
-        </div>
+        <div class="proj-desc">Comprehensive dashboard tracking revenue, sales growth, AOV, and regional performance. Geographic mapping, customer segmentation, drill-downs, and inventory views.</div>
+        <div class="proj-tech"><span>Power BI</span><span>DAX</span><span>SQL</span><span>Excel</span></div>
       </div>
 
-      <div class="proj-card">
-        <div class="proj-badge badge-pbi"><i class="ti ti-users" style="font-size:13px"></i> Power BI</div>
+      <div class="proj-card" data-cat="powerbi">
+        <div class="proj-badge badge-pbi">Power BI</div>
         <div class="proj-name">HR Recruitment Dashboard</div>
-        <div class="proj-desc">Real-time dashboard visualizing the full recruitment funnel from applications to hires. Included recruiter KPI tracking, time-to-fill analysis, and candidate feedback sentiment analysis.</div>
-        <div class="proj-tech">
-          <span>Power BI</span><span>DAX</span><span>SQL</span>
-        </div>
+        <div class="proj-desc">Real-time funnel dashboard from applications to hires. Recruiter KPIs, time-to-fill analysis, and candidate feedback sentiment tracking.</div>
+        <div class="proj-tech"><span>Power BI</span><span>DAX</span><span>SQL</span></div>
       </div>
 
-      <div class="proj-card">
-        <div class="proj-badge badge-pbi"><i class="ti ti-activity" style="font-size:13px"></i> Power BI</div>
+      <div class="proj-card" data-cat="powerbi">
+        <div class="proj-badge badge-pbi">Power BI</div>
         <div class="proj-name">Employee Performance Dashboard</div>
-        <div class="proj-desc">Advanced data modelling using DAX, parameters, context filters, and hierarchies. Interactive dashboards for merchant data and campaign performance via SQL and Excel ETL pipelines.</div>
-        <div class="proj-tech">
-          <span>Power BI</span><span>DAX</span><span>ETL</span><span>SQL</span><span>Excel</span>
+        <div class="proj-desc">Advanced DAX modelling with parameters, context filters, and hierarchies. Interactive dashboards for merchant data and campaign analysis via ETL pipelines.</div>
+        <div class="proj-tech"><span>Power BI</span><span>DAX</span><span>ETL</span><span>SQL</span></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT / CONTACT -->
+<section id="contact">
+  <div class="wrap">
+    <div class="section-tag reveal">Get In Touch</div>
+    <h2 class="section-title reveal">Let's <span>Connect</span></h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a <strong>Data Engineer and Power Platform Specialist</strong> based in New Delhi, India with 4+ years of experience building solutions that actually get used.</p>
+        <p>My focus is on <strong>end-to-end data pipelines, Power BI dashboards, and Microsoft Power Platform automation</strong> — from requirements gathering with stakeholders to deployed, production-grade solutions.</p>
+        <p>Currently at <strong>Sage</strong> as Associate System Analyst. Open to new Data Engineer, Power BI Developer, or Power Platform Specialist roles.</p>
+      </div>
+      <div class="contact-list reveal">
+        <a href="mailto:sntiwari1999@gmail.com" class="contact-row-item">
+          <div class="contact-icon">✉</div>
+          <div>
+            <div class="contact-label">Email</div>
+            <div class="contact-val">sntiwari1999@gmail.com</div>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/shivam-nath-tiwari-758625216" target="_blank" class="contact-row-item">
+          <div class="contact-icon">in</div>
+          <div>
+            <div class="contact-label">LinkedIn</div>
+            <div class="contact-val">shivam-nath-tiwari-758625216</div>
+          </div>
+        </a>
+        <a href="tel:+918840812168" class="contact-row-item">
+          <div class="contact-icon">☎</div>
+          <div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-val">+91 88408 12168</div>
+          </div>
+        </a>
+        <div class="contact-row-item" style="pointer-events:none;">
+          <div class="contact-icon">📍</div>
+          <div>
+            <div class="contact-label">Location</div>
+            <div class="contact-val">New Delhi, India</div>
+          </div>
         </div>
       </div>
-
     </div>
   </div>
+</section>
 
-  <!-- Education -->
-  <div class="section">
-    <div class="section-label">Education</div>
-    <div class="edu-card">
-      <div class="edu-icon"><i class="ti ti-school"></i></div>
-      <div>
-        <div class="edu-degree">B.Tech in Computer Science and Engineering</div>
-        <div class="edu-school">APJ Abdul Kalam Technological University</div>
-        <div class="edu-year">2017 – 2021</div>
-      </div>
-    </div>
+<footer>
+  <div class="wrap">
+    <p>© 2025 Shivam Nath Tiwari &nbsp;·&nbsp; Built for impact, not just impressions.</p>
   </div>
+</footer>
 
-  <div class="footer">Shivam Nath Tiwari &nbsp;·&nbsp; sntiwari1999@gmail.com &nbsp;·&nbsp; New Delhi, India</div>
+<script>
+// ── CURSOR ──
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{
+  mx=e.clientX; my=e.clientY;
+  cursor.style.left=mx+'px'; cursor.style.top=my+'px';
+});
+function animRing(){
+  rx+=(mx-rx)*.12; ry+=(my-ry)*.12;
+  ring.style.left=rx+'px'; ring.style.top=ry+'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button,.proj-card,.skill-card,.contact-row-item').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{
+    cursor.style.width='14px'; cursor.style.height='14px';
+    ring.style.width='48px'; ring.style.height='48px';
+    ring.style.borderColor='rgba(66,165,245,0.7)';
+  });
+  el.addEventListener('mouseleave',()=>{
+    cursor.style.width='8px'; cursor.style.height='8px';
+    ring.style.width='32px'; ring.style.height='32px';
+    ring.style.borderColor='rgba(66,165,245,0.4)';
+  });
+});
 
-</main>
+// ── COUNTER ANIMATION ──
+function animCount(el,target,suffix){
+  let start=0; const dur=1800;
+  const startTime=performance.now();
+  function step(now){
+    const p=Math.min((now-startTime)/dur,1);
+    const ease=1-Math.pow(1-p,3);
+    el.textContent=Math.round(ease*target)+(suffix||'');
+    if(p<1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+const counters=document.querySelectorAll('[data-count]');
+let countersStarted=false;
+const heroObs=new IntersectionObserver(entries=>{
+  if(entries[0].isIntersecting && !countersStarted){
+    countersStarted=true;
+    counters.forEach(el=>{
+      const t=parseInt(el.dataset.count);
+      const suffix=el.parentElement.querySelector('.hero-metric-label').textContent.startsWith('%')?'%':'+';
+      animCount(el,t,suffix);
+    });
+  }
+},{threshold:.5});
+heroObs.observe(document.querySelector('.hero-metrics'));
+
+// ── SCROLL REVEAL ──
+const revealObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){ e.target.classList.add('visible'); }
+  });
+},{threshold:.12,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal,.exp-item,.proj-card').forEach(el=>revealObs.observe(el));
+
+// ── SKILL BARS ──
+const barObs=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.querySelectorAll('.skill-bar-fill').forEach(bar=>{
+        bar.style.width=bar.dataset.w+'%';
+      });
+    }
+  });
+},{threshold:.3});
+document.querySelectorAll('.skill-card').forEach(c=>barObs.observe(c));
+
+// ── PROJECT FILTER ──
+const filterBtns=document.querySelectorAll('.filter-btn');
+const projCards=document.querySelectorAll('.proj-card');
+filterBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    filterBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    projCards.forEach(card=>{
+      if(f==='all'||card.dataset.cat===f){
+        card.classList.remove('hidden');
+        setTimeout(()=>card.classList.add('visible'),30);
+      } else {
+        card.classList.remove('visible');
+        card.classList.add('hidden');
+      }
+    });
+  });
+});
+
+// ── NAV ACTIVE ON SCROLL ──
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(s=>{
+    if(window.scrollY>=s.offsetTop-120) cur=s.id;
+  });
+  navLinks.forEach(a=>{
+    a.style.color=a.getAttribute('href')==='#'+cur?'var(--blue-light)':'var(--text-2)';
+  });
+},{passive:true});
+</script>
 </body>
 </html>
